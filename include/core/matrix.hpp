@@ -10,7 +10,7 @@
 
 namespace fem
 {
-    template <size_t M = 0, size_t N = 0, typename T>
+    template <typename T, size_t M = 0, size_t N = 0>
     class DenseMatrix
     {
     public:
@@ -316,7 +316,7 @@ namespace fem
             {
                 for (size_type j = 0; j < cols_; ++j)
                 {
-                    std::cout << (*this)(i, j) << "\t";
+                    std::cout << std::setw(10) << (*this)(i, j) << "\t";
                 }
                 std::cout << "\n";
             }
