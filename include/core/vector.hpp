@@ -8,6 +8,7 @@
 #include <utility>
 #include <cmath>
 #include <stdexcept>
+#include <numeric>
 
 namespace fem
 {
