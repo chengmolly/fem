@@ -55,6 +55,7 @@ namespace fem
             values_ = std::move(vals);
         }
 
+        // empty matrix
         void begin_assembly()
         {
             col_idx_.clear();
@@ -62,6 +63,7 @@ namespace fem
             std::fill(row_ptr_.begin(), row_ptr_.end(), 0);
         }
 
+        // insert entry into matrix
         void insert_entry(int row, int col, double val)
         {
             col_idx_.push_back(col);
@@ -87,17 +89,8 @@ namespace fem
 
             for (size_t i = 0; i < rows_; ++i)
             {
-                for (size_t j = temp_ptr_[i]; j < temp_ptr_[i + 1] - 1; ++j)
-                {
-                    for (size_t k = j + 1; k < temp_ptr_[i + 1]; ++k)
-                    {
-                        if (new_col_idx[j] > new_col_idx[k])
-                        {
-                            std::swap(new_col_idx[j], new_col_idx[k]);
-                            std::swap(new_values[j], new_values[k]);
-                        }
-                    }
-                }
+                std::sort(new_col_idx.begin() + temp_ptr_[i], new_col_idx.begin() + temp_ptr_[i + 1]);
+                std::sort(new_values.begin() + temp_ptr_[i], new_values.begin() + temp_ptr_[i + 1]);
             }
             col_idx_ = std::move(new_col_idx);
             values_ = std::move(new_values);
@@ -114,10 +107,8 @@ namespace fem
 
             for (size_t i = 0; i < rows_; ++i)
             {
-                size_t row_start = row_ptr_[i];
-                size_t row_end = row_ptr_[i + 1];
-
-                for (size_t j = row_start; j < row_end; ++j)
+                new_row_ptr[i + 1] = new_row_ptr[i];
+                for (size_t j = row_ptr_[i]; j < row_ptr_[i + 1]; ++j)
                 {
                     int col = col_idx_[j];
                     double val = values_[j];
