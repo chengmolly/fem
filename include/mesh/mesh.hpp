@@ -133,7 +133,7 @@ namespace fem
     class Element
     {
     public:
-        using node_ind_type = std::vector<int>;
+        using node_ind_type = std::vector<size_t>;
 
         Element() : id_(-1), type_(ElementType::TRI3), nodes_() {}
 
@@ -144,14 +144,14 @@ namespace fem
         ElementType type() const { return type_; }
         void set_type(ElementType type) { type_ = type; }
         int n_nodes() const { return static_cast<int>(nodes_.size()); }
-        int n_dim() const { return ElementInfo::n_dim; }
-        int order() const { return ElementInfo::n_order; }
+        int n_dim() const { return ElementInfo::get_dimension(type()); }
+        int order() const { return ElementInfo::get_order(type()); }
 
         const node_ind_type &node_ids() const { return nodes_; }
         node_ind_type &node_ids() { return nodes_; }
 
-        int operator[](size_t i) const { return nodes_[i]; }
-        int &operator[](size_t i) { return nodes_[i]; }
+        size_t operator[](size_t i) const { return nodes_[i]; }
+        size_t &operator[](size_t i) { return nodes_[i]; }
 
         const Node &get_node(const std::vector<Node> &all_nodes, size_t i) const
         {

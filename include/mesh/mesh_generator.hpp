@@ -205,11 +205,11 @@ namespace fem
             switch (type)
             {
             case Type::Uniform1D:
-                return srd::make_unique<Uniform1DMeshGenerator>(std::forward<Args>(args...));
+                return srd::make_unique<Uniform1DMeshGenerator>(std::forward<Args>(args)...);
             case Type::Rect2D:
-                return std::make_unique<Rect2DMeshGenerator>(std::forward<Args>(args...));
+                return std::make_unique<Rect2DMeshGenerator>(std::forward<Args>(args)...);
             case Type::Box3D:
-                return std::make_unique<Box3DMeshGenerator>(std::forward<Args>(args...));
+                return std::make_unique<Box3DMeshGenerator>(std::forward<Args>(args)...);
             default:
                 return nullptr;
             }
