@@ -254,7 +254,7 @@ namespace fem
     public:
         BCManager() = default;
 
-        void add_dirichlet(const std::vector<int> &nodes, const std::vector<double> &values)
+        void add_dirichlet(const std::vector<size_t> &nodes, const std::vector<double> &values)
         {
             for (size_t i = 0; i < nodes.size(); ++i)
             {
@@ -262,7 +262,7 @@ namespace fem
             }
         }
 
-        void add_neumann(const std::vector<int> &nodes, const std::vector<double> &fluxes)
+        void add_neumann(const std::vector<size_t> &nodes, const std::vector<double> &fluxes)
         {
             for (size_t i = 0; i < nodes.size(); ++i)
             {
